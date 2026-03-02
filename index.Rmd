@@ -12,3 +12,20 @@ output:
 ## Project thoughts
 
 I am interested in exploring data related to women's health, particularly access to contraception and abortion policy changes. I am considering analyzing the trends that emerge from this sort of data because I am particularly passionate about women's reproductive health as a woman myself. I am also doing an honors project for my public health class on a similar topic, so I think it would be useful for me to be more knowledgeable on the specific trends that have to do with contraception access and abortion policy changes. 
+
+
+My research question will ask (changed it up a little from my original thoughts): How does the percentage of uninsured residents in a U.S. state relate to median household income and education level? I hypothesize that states with higher income and education levels will have lower uninsured rates, because research has shown that education, and economic advantages are tied to certain health behaviors. The dependent variable will be the state-level uninsured rate (measured by the percentage of state residents under the age of 65 without health insurance coverage. The independent variables will be median household income and percent of adults with a bachelors degree (both measured at state level). If the results show a negative correlation between education and income with uninsured rates and is statistically significant, than that would be reason to believe my hypothesis is correct. If these coefficients are positive or aren't significantly significant, than that would disprove my hypothesis. 
+
+```{r}
+library(tidyverse)
+uninsured <- read_csv("uninsured_state.csv")
+ahr <- read_csv("ahr_all_states_2024.csv") 
+per_capita_income <- ahr |>
+  filter(str_detect(Measure, "Per Capita Income")) |>
+  select(State, Income = Value)
+education <- read_csv("education_state.csv")
+
+glimpse(uninsured)
+glimpse(per_capita_income)
+glimpse(education)
+```
