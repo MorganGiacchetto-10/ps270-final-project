@@ -16,16 +16,102 @@ I am interested in exploring data related to women's health, particularly access
 
 My research question will ask (changed it up a little from my original thoughts): How does the percentage of uninsured residents in a U.S. state relate to median household income and education level? I hypothesize that states with higher income and education levels will have lower uninsured rates, because research has shown that education, and economic advantages are tied to certain health behaviors. The dependent variable will be the state-level uninsured rate (measured by the percentage of state residents under the age of 65 without health insurance coverage. The independent variables will be median household income and percent of adults with a bachelors degree (both measured at state level). If the results show a negative correlation between education and income with uninsured rates and is statistically significant, than that would be reason to believe my hypothesis is correct. If these coefficients are positive or aren't significantly significant, than that would disprove my hypothesis. 
 
+
+
 ```{r}
 library(tidyverse)
-uninsured <- read_csv("uninsured_state.csv")
 ahr <- read_csv("ahr_all_states_2024.csv") 
 per_capita_income <- ahr |>
   filter(str_detect(Measure, "Per Capita Income")) |>
   select(State, Income = Value)
 education <- read_csv("education_state.csv")
-
-glimpse(uninsured)
-glimpse(per_capita_income)
-glimpse(education)
+uninsured <- read_csv("uninsuredbystate.csv")
 ```
+
+```{r}
+uninsured <- read_csv("uninsuredbystate.csv")
+```
+
+```{r}
+uninsured_clean <- uninsured |>
+  select(State = NAME, Uninsured = S2701_C05_001E) |>
+  filter(State != "United States",
+         State != "Geographic Area Name") |>
+  mutate(Uninsured = as.numeric(Uninsured))
+head(uninsured_clean)
+```
+
+```{r}
+education |>
+  select(NAME, `S1501_C02_015E`) |>
+  head()
+```
+
+```{r}
+education_clean <- education |>
+  select(State = NAME, Education = `S1501_C02_015E`) |>
+  filter(State != "United States",
+         State != "Geographic Area Name") |>
+  mutate(Education = as.numeric(Education))
+head(education_clean)
+```
+
+```{r}
+ahr <-read_csv("ahr_all_states_2024.csv")
+unique(ahr$Measure) |> str_subset("Income")
+```
+
+```{r}
+income_clean <- ahr |>
+  filter(Measure == "Per Capita Income") |>
+  select(State, Income = Value) |>
+  mutate(Income = as.numeric(Income))
+head(income_clean)
+```
+
+```{r}
+library(tibble)
+
+state_lookup <- tibble(
+  abb = state.abb,
+  State = state.name
+)
+```
+
+```{r}
+income_clean <- income_clean |>
+  rename(abb = State) |>
+  filter(abb != "ALL") |>
+  inner_join(state_lookup, by = "abb") |>
+  select(State, Income)
+```
+
+```{r}
+head(income_clean)
+```
+
+```{r}
+final_data <- uninsured_clean |>
+  inner_join(education_clean, by = "State") |>
+  inner_join(income_clean, by = "State")
+```
+
+```{r}
+glimpse(final_data)
+nrow(final_data)
+```
+
+```{r}
+ggplot(final_data, aes(
+  x = Education,
+  y = Uninsured,
+  color = Income)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "indianred") +
+  labs(
+    title = "Eduaction, Income, and Uninsured Rates Across U.S. States",
+    x = "Percent of Adults with a Bachelor's Degree or Higher",
+    y = "Percent Uninsured",
+    color = "Per Capita Income")
+```
+
