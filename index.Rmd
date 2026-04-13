@@ -115,5 +115,13 @@ ggplot(final_data, aes(
     color = "Per Capita Income")
 ```
 
+```{r}
+fit <- lm(Uninsured ~ Education + Income, data = final_data)
+fit |>
+  broom::tidy() |>
+  select(term, estimate) |>
+  knitr::kable(digits = 5)
+```
 
+The results of the regression indicates that income is negatively associated with the uninsured rates, implying that high income states are more likely to have lower uninsured populations. Education's effect however is very small and positive, suggesting that there isn't as meaningful a relationship there. 
 
