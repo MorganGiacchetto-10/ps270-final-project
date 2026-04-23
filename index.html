@@ -1747,13 +1747,13 @@ $ Income    &lt;dbl&gt; 35046, 45792, 41290, 33012, 48013, 51768, 53119, 4…</c
 </table>
 </div>
 <p>The results of the regression indicates that income is negatively associated with the uninsured rates, implying that high income states are more likely to have lower uninsured populations. Education’s effect however is very small and positive, suggesting that there isn’t as meaningful a relationship there.</p>
-<p>Final Milestone:</p>
-<ol type="1">
-<li><p>In my project, I set out to see if there is a relationship between access to health insurance and socioeconomic factors in the United States. My research question was: How does the percentage of uninsured residents in a U.S. state relate to median household income and education level? I then hypothesized that states with higher income and education levels will have lower uninsured rates, because research has shown that education, and economic advantages are tied to certain health behaviors. This topic is interesting to me because I feel that it’s very important to understand the underlying factors leading too certain gaps (insurance gaps in this case), to further identify disparities that need to be addressed, and further modify health policy, another subject that I’m very interested in.</p></li>
-<li><p>My analysis was cross-sectional as my data was collected from multiple of states at a singular point in time. they were taken at the state level from multiple sources including America’s Health Ranking dataset, Census-based education data, and uninsured rate estimates. Each row in my data represents each U.S. state.</p></li>
-</ol>
+<h2 id="final-milestone">Final Milestone</h2>
+<h3 id="section">1</h3>
+<p>In my project, I set out to see if there is a relationship between access to health insurance and socioeconomic factors in the United States. My research question was: How does the percentage of uninsured residents in a U.S. state relate to median household income and education level? I then hypothesized that states with higher income and education levels will have lower uninsured rates, because research has shown that education, and economic advantages are tied to certain health behaviors. This topic is interesting to me because I feel that it’s very important to understand the underlying factors leading too certain gaps (insurance gaps in this case), to further identify disparities that need to be addressed, and further modify health policy, another subject that I’m very interested in.</p>
+<h3 id="section-1">2</h3>
+<p>My analysis was cross-sectional as my data was collected from multiple of states at a singular point in time. they were taken at the state level from multiple sources including America’s Health Ranking dataset, Census-based education data, and uninsured rate estimates. Each row in my data represents each U.S. state.</p>
 <p>The dependent variable in this study is the percentage of uninsured individuals under the age of 65, and this data came from the Census survey data. There were two independent variables used here: the percentage of adults with a bachelor’s degree or higher to measure education levels, and per capita income measured in dollars to assess the economic aspect. Both of these variables were measured at the state-level. These variables were then merged by state names into a single dataset. To support my hypothesis, both the education and income variables would have to present a negative relationship with uninsured rates. To reject my hypothesis, either the relationship would have to be positive/no correlation at all, or it would have to not be statistically significant.</p>
-Here is a visualization of just the dependent variable across states:
+<h3 id="here-is-a-visualization-of-just-the-dependent-variable-across-states">Here is a visualization of just the dependent variable across states:</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>final_data</span> <span class='op'>|&gt;</span></span>
@@ -1767,9 +1767,9 @@ Here is a visualization of just the dependent variable across states:
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-15-1.png" alt="" width="624" /></p>
 </div>
-<p>This plot indicates that majority of states possess uninsured rates of about 5% -10%, with some outliers.</p>
-<ol start="3" type="1">
-<li>The scatterplot below shows the relationship between the two independent and one dependent variable.
+<h3 id="this-plot-indicates-that-majority-of-states-possess-uninsured-rates-of-about-5--10-with-some-outliers.">This plot indicates that majority of states possess uninsured rates of about 5% -10%, with some outliers.</h3>
+<h3 id="section-2">3</h3>
+<h3 id="the-scatterplot-below-shows-the-relationship-between-the-two-independent-and-one-dependent-variable.">The scatterplot below shows the relationship between the two independent and one dependent variable.</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>final_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span></span>
@@ -1785,10 +1785,8 @@ Here is a visualization of just the dependent variable across states:
 <span>    color <span class='op'>=</span> <span class='st'>"Per Capita Income"</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-16-1.png" alt="" width="624" /></p>
-</div></li>
-</ol>
 </div>
-<p>The regression output can provide more specific results to dissect these relationships:</p>
+<h3 id="the-regression-output-can-provide-more-specific-results-to-dissect-these-relationships">The regression output can provide more specific results to dissect these relationships</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Uninsured</span> <span class='op'>~</span> <span class='va'>Education</span> <span class='op'>+</span> <span class='va'>Income</span>, data <span class='op'>=</span> <span class='va'>final_data</span><span class='op'>)</span></span>
@@ -1831,9 +1829,8 @@ Here is a visualization of just the dependent variable across states:
 </div>
 <p>The first scatterplot suggests a negative relationship between income and uninsured rates as the states with higher income levels (the points with the lighter blue color) seem to be associated with lower uninsured rates. Additionally, there seems to be a negative relationship between education and uninsured rates as well, although this relationship seems a little less prevalent. However, the visual patterns seen here is not supported by my regression results as I’ll discuss in the next paragraph.</p>
 <p>While the scatterplot suggested that there was a negative relationship between uninsured rates and education as well as uninsured rates and income, the regression here indicates show that the relationships are not actually statistically sifnificant. The coefficient related to education is close to 0 and has an extremely large p-value, 0.987, which is obviously larger than 0.05, indicating that it’s not statistically significant. Similarly with income, the p-value is 0.147, again larger than 0.05 indicating it’s not statistically significant either, even though the coefficient was negative, implying that higher income may be associated with lower uninsured rates. So unfortunately due to these large p-values, we cannot assume that these relationships are meaningful or be interpreted causally.</p>
-<ol start="4" type="1">
-<li>In conclusion, the results from the plots and regression partially support my hypothesis that states with higher income and education levels will have lower uninsured rates. Higher income and education do appear to be negatively associated with uninsured rates (income more so than education) as shown in the scatterplot, but both were shown not to be very meaningful as they both had such high p-values when the regression was ran. Due to those p-values, we cannot confidently state that there are any definite causal relationships here, and therefore fail to reject the null hypothesis that there is no direct correlation between these variables. A possible limitation could be the presence of certain omitted or confounding variables could also be playing a part here like certain state-level policies which could affect both income and insurance rates. With more time and resources, I could try to account for all of these potential variables to better understand how the independent variables affect the dependent one.</li>
-</ol>
+<h3 id="section-3">4</h3>
+<p>In conclusion, the results from the plots and regression partially support my hypothesis that states with higher income and education levels will have lower uninsured rates. Higher income and education do appear to be negatively associated with uninsured rates (income more so than education) as shown in the scatterplot, but both were shown not to be very meaningful as they both had such high p-values when the regression was ran. Due to those p-values, we cannot confidently state that there are any definite causal relationships here, and therefore fail to reject the null hypothesis that there is no direct correlation between these variables. A possible limitation could be the presence of certain omitted or confounding variables could also be playing a part here like certain state-level policies which could affect both income and insurance rates. With more time and resources, I could try to account for all of these potential variables to better understand how the independent variables affect the dependent one.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
