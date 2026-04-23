@@ -138,7 +138,7 @@ The dependent variable in this study is the percentage of uninsured individuals 
 ```{r}
 final_data |>
 ggplot(aes(x = Uninsured)) +
-  geom_histogram(binwidth = 1, fill = "steelblue") +
+  geom_histogram(binwidth = 1, fill = "deepskyblue") +
   labs(
     title = "Distribution of Uninsured Rates Across U.S. States",
     x = "Percent Uninsured",
