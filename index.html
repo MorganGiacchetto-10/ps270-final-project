@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["ACSST1Y2024.S2701-Table-Notes.txt","ahr_all_states_2024.csv","education_state.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-13-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","uninsuredbystate.csv","uninsuredmeta.csv"]}
+  {"type":"character","attributes":{},"value":["ACSST1Y2024.S2701-Table-Notes.txt","ahr_all_states_2024.csv","education_state.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-13-1.png","index_files/figure-html5/unnamed-chunk-15-1.png","index_files/figure-html5/unnamed-chunk-16-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js","uninsuredbystate.csv","uninsuredmeta.csv"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1747,6 +1747,93 @@ $ Income    &lt;dbl&gt; 35046, 45792, 41290, 33012, 48013, 51768, 53119, 4…</c
 </table>
 </div>
 <p>The results of the regression indicates that income is negatively associated with the uninsured rates, implying that high income states are more likely to have lower uninsured populations. Education’s effect however is very small and positive, suggesting that there isn’t as meaningful a relationship there.</p>
+<p>Final Milestone:</p>
+<ol type="1">
+<li><p>In my project, I set out to see if there is a relationship between access to health insurance and socioeconomic factors in the United States. My research question was: How does the percentage of uninsured residents in a U.S. state relate to median household income and education level? I then hypothesized that states with higher income and education levels will have lower uninsured rates, because research has shown that education, and economic advantages are tied to certain health behaviors. This topic is interesting to me because I feel that it’s very important to understand the underlying factors leading too certain gaps (insurance gaps in this case), to further identify disparities that need to be addressed, and further modify health policy, another subject that I’m very interested in.</p></li>
+<li><p>My analysis was cross-sectional as my data was collected from multiple of states at a singular point in time. they were taken at the state level from multiple sources including America’s Health Ranking dataset, Census-based education data, and uninsured rate estimates. Each row in my data represents each U.S. state.</p></li>
+</ol>
+<p>The dependent variable in this study is the percentage of uninsured individuals under the age of 65, and this data came from the Census survey data. There were two independent variables used here: the percentage of adults with a bachelor’s degree or higher to measure education levels, and per capita income measured in dollars to assess the economic aspect. Both of these variables were measured at the state-level. These variables were then merged by state names into a single dataset. To support my hypothesis, both the education and income variables would have to present a negative relationship with uninsured rates. To reject my hypothesis, either the relationship would have to be positive/no correlation at all, or it would have to not be statistically significant.</p>
+Here is a visualization of just the dependent variable across states:
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>final_data</span> <span class='op'>|&gt;</span></span>
+<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>Uninsured</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>binwidth <span class='op'>=</span> <span class='fl'>1</span>, fill <span class='op'>=</span> <span class='st'>"steelblue"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Distribution of Uninsured Rates Across U.S. States"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Percent Uninsured"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Number of States"</span></span>
+<span>  <span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-15-1.png" alt="" width="624" /></p>
+</div>
+<p>This plot indicates that majority of states possess uninsured rates of about 5% -10%, with some outliers.</p>
+<ol start="3" type="1">
+<li>The scatterplot below shows the relationship between the two independent and one dependent variable.
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>final_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span></span>
+<span>  x <span class='op'>=</span> <span class='va'>Education</span>,</span>
+<span>  y <span class='op'>=</span> <span class='va'>Uninsured</span>,</span>
+<span>  color <span class='op'>=</span> <span class='va'>Income</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se <span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"indianred"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Eduaction, Income, and Uninsured Rates Across U.S. States"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Percent of Adults with a Bachelor's Degree or Higher"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Percent Uninsured"</span>,</span>
+<span>    color <span class='op'>=</span> <span class='st'>"Per Capita Income"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-16-1.png" alt="" width="624" /></p>
+</div></li>
+</ol>
+</div>
+<p>The regression output can provide more specific results to dissect these relationships:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Uninsured</span> <span class='op'>~</span> <span class='va'>Education</span> <span class='op'>+</span> <span class='va'>Income</span>, data <span class='op'>=</span> <span class='va'>final_data</span><span class='op'>)</span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>fit</span><span class='op'>)</span><span class='op'>$</span><span class='va'>coefficients</span>, digits <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Std. Error</th>
+<th style="text-align: right;">t value</th>
+<th style="text-align: right;">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">15.934</td>
+<td style="text-align: right;">2.409</td>
+<td style="text-align: right;">6.613</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Education</td>
+<td style="text-align: right;">0.002</td>
+<td style="text-align: right;">0.146</td>
+<td style="text-align: right;">0.017</td>
+<td style="text-align: right;">0.987</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Income</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">-1.476</td>
+<td style="text-align: right;">0.147</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The first scatterplot suggests a negative relationship between income and uninsured rates as the states with higher income levels (the points with the lighter blue color) seem to be associated with lower uninsured rates. Additionally, there seems to be a negative relationship between education and uninsured rates as well, although this relationship seems a little less prevalent. However, the visual patterns seen here is not supported by my regression results as I’ll discuss in the next paragraph.</p>
+<p>While the scatterplot suggested that there was a negative relationship between uninsured rates and education as well as uninsured rates and income, the regression here indicates show that the relationships are not actually statistically sifnificant. The coefficient related to education is close to 0 and has an extremely large p-value, 0.987, which is obviously larger than 0.05, indicating that it’s not statistically significant. Similarly with income, the p-value is 0.147, again larger than 0.05 indicating it’s not statistically significant either, even though the coefficient was negative, implying that higher income may be associated with lower uninsured rates. So unfortunately due to these large p-values, we cannot assume that these relationships are meaningful or be interpreted causally.</p>
+<ol start="4" type="1">
+<li>In conclusion, the results from the plots and regression partially support my hypothesis that states with higher income and education levels will have lower uninsured rates. Higher income and education do appear to be negatively associated with uninsured rates (income more so than education) as shown in the scatterplot, but both were shown not to be very meaningful as they both had such high p-values when the regression was ran. Due to those p-values, we cannot confidently state that there are any definite causal relationships here, and therefore fail to reject the null hypothesis that there is no direct correlation between these variables. A possible limitation could be the presence of certain omitted or confounding variables could also be playing a part here like certain state-level policies which could affect both income and insurance rates. With more time and resources, I could try to account for all of these potential variables to better understand how the independent variables affect the dependent one.</li>
+</ol>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
