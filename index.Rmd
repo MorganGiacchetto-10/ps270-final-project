@@ -176,3 +176,7 @@ While the scatterplot suggested that there was a negative relationship between u
 
 ### 4
 In conclusion, the results from the plots and regression partially support my hypothesis that states with higher income and education levels will have lower uninsured rates. Higher income and education do appear to be negatively associated with uninsured rates (income more so than education) as shown in the scatterplot, but both were shown not to be very meaningful as they both had such high p-values when the regression was ran. Due to those p-values, we cannot confidently state that there are any definite causal relationships here, and therefore fail to reject the null hypothesis that there is no direct correlation between these variables. A possible limitation could be the presence of certain omitted or confounding variables could also be playing a part here like certain state-level policies which could affect both income and insurance rates. With more time and resources, I could try to account for all of these potential variables to better understand how the independent variables affect the dependent one. 
+
+
+AI Disclosure Statement:
+I used AI to help merge the datasets into one and to add the blue gradient on the points in the plot for per capita income because I couldn't figure out how to plot both independent variables on one graph. 
